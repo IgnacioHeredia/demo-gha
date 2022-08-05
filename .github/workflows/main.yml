@@ -20,8 +20,8 @@ jobs:
 
       - name: Update txt file
         run: |
-          git config --global user.name ''
-          git config --global user.email ''
+          git config user.name 'demo-name'
+          git config user.email 'demo-email'
           python demo.py
           git commit -am "[BOT] update txt"
           git push
