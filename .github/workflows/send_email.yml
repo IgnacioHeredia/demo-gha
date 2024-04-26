@@ -1,0 +1,24 @@
+---
+name: 'Github Workflow History'
+
+# Job to run main task and send an email only the first time the task fails 
+# Based on: https://www.softwaretester.blog/detecting-github-workflow-job-run-status-changes
+
+'on':
+  workflow_dispatch:
+
+jobs:
+  exampleJob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.office365.com
+          server_port: 587
+          username: ${{secrets.FROM_HOTMAIL_USERNAME}}
+          password: ${{secrets.FROM_HOTMAIL_PASSWORD}}
+          subject: Failed job
+          to: ${{secrets.TO_HOTMAIL_USERNAME}}
+          from: Github Bot
+          body: Job failed
