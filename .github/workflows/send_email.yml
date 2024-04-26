@@ -16,6 +16,7 @@ jobs:
         with:
           server_address: smtp.office365.com
           server_port: 587
+          secure: true
           username: ${{secrets.FROM_MAIL_USERNAME}}
           password: ${{secrets.FROM_MAIL_PASSWORD}}
           subject: Failed job
