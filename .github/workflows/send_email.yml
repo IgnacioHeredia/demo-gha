@@ -17,7 +17,7 @@ jobs:
           python \
           --from_user ${{secrets.FROM_MAIL_USERNAME}} \
           --from_pwd ${{secrets.FROM_MAIL_PASSWORD}} \
-          --to_user ${{secrets.TO_MAIL_USERNAME}}
+          --to_user ${{secrets.TO_MAIL_USERNAME}} \
           --subject "Failed Github workflow"          
 
       - name: Send mail
