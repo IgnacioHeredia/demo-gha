@@ -1,0 +1,25 @@
+name: Check Previous Run Status
+
+on: [push, pull_request]
+
+jobs:
+  check-status:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install GitHub CLI
+      run: |
+        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+        sudo apt-add-repository https://cli.github.com/packages
+        sudo apt update
+        sudo apt install gh
+
+    - name: Get previous run status
+      run: |
+        gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+        RUN_ID=$(gh run list --workflow=workflow.yml | awk 'NR==2{print $1}')
+        RUN_STATUS=$(gh run view $RUN_ID --json status -q ".status")
+        echo "Previous run status: $RUN_STATUS"
