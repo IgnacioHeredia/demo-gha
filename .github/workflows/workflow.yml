@@ -35,10 +35,10 @@ jobs:
       # (ie. job fails and the previous job run was successful)
       # Otherwise you would receive an email in each of the subsequent failures
       - name: Send email
-        if:  steps.main_task.outcome == 'failure'
-        # if:  steps.main_task.outputs.outcome == 'failure' && steps.lastJobStatus.outputs.status == 'success'
-        # run: echo "send email!!!"
+        if:  always() && steps.main_task.outcome == 'failure'
+        # if: always() &&  steps.main_task.outputs.outcome == 'failure' && steps.lastJobStatus.outputs.status == 'success'
+        run: echo "send email!!!"
         # if: always()
-        run: | 
-          echo "Previous step output: ${{ steps.main_task.outcome }}"
+        #run: | 
+        #  echo "Previous step output: ${{ steps.main_task.outcome }}"
         
