@@ -36,6 +36,8 @@ jobs:
       # Otherwise you would receive an email in each of the subsequent failures
       - name: Send email
         if:  steps.main_task.outcome != 'success' && steps.lastJobStatus.outputs.status == 'success'
-        run: echo "send email!!!"
+        run:
+          echo "$steps.main_task.outcome"
+          echo "send email!!!"
 
 
