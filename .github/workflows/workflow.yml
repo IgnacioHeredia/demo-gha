@@ -1,6 +1,8 @@
 ---
 name: 'Github Workflow History'
 
+# Job to run main task and send an email only the first time the task fails 
+
 'on':
   workflow_dispatch:
     inputs:
@@ -35,10 +37,5 @@ jobs:
       # (ie. job fails and the previous job run was successful)
       # Otherwise you would receive an email in each of the subsequent failures
       - name: Send email
-        # if:  always() && steps.main_task.outcome == 'failure'
         if: always() &&  steps.main_task.outcome == 'failure' && steps.lastJobStatus.outputs.status == 'success'
-        run: echo "send email!!!"
-        # if: always()
-        #run: | 
-        #  echo "Previous step output: ${{ steps.main_task.outcome }}"
-        
+        run: echo "send email!!!"       
