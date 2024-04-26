@@ -21,7 +21,7 @@ jobs:
         id: lastJobStatus
         if: always()
         run: |
-          LAST_JOB_STATUS=$(gh run list --workflow workflow.yaml | grep -oh "completed.*" | head -1 | awk '{print $2}')
+          LAST_JOB_STATUS=$(gh run list --workflow workflow.yml | grep -oh "completed.*" | head -1 | awk '{print $2}')
           echo "::set-output name=status::$LAST_JOB_STATUS"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
