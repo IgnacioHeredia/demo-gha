@@ -23,3 +23,12 @@ jobs:
           to: ${{secrets.TO_MAIL_USERNAME}}
           from: Github Bot
           body: Job failed
+
+      - name: Send mail 2
+        run: |
+          curl -s https://gist.githubusercontent.com/IgnacioHeredia/5f8fd2fc7d56763e4060c7b8fc8e0212/raw/3b5915cf3b8e0fd3c67b7ef7a019175116f0c367/send_email.py | \
+          python \
+          --from_user ${{secrets.FROM_MAIL_USERNAME}} \
+          --from_pwd ${{secrets.FROM_MAIL_PASSWORD}} \
+          --to_user ${{secrets.TO_MAIL_USERNAME}}
+          --subject "Failed Github workflow"          
