@@ -17,6 +17,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Pass or fail job
+        id: main_task
+        run: exit 1
+        if: github.event.inputs.failJob == 'true'
+
       - name: Check last job status
         id: lastJobStatus
         if: always()
@@ -26,10 +31,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
 
-      - name: Showcase output variable
-        if: always() && steps.lastJobStatus.outputs.status == 'success'
-        run: echo "keep running the workflow!!!"
+      # Only send email the first time the workflow fails
+      # (ie. job fails and the previous job run was successful)
+      # Otherwise you would receive an email in each of the subsequent failures
+      - name: Send email
+        if:  steps.main_task.outcome != 'success' && steps.lastJobStatus.outputs.status == 'success'
+        run: echo "send email!!!"
 
-      - name: Pass or fail job
-        run: exit 1
-        if: github.event.inputs.failJob == 'true'
+
