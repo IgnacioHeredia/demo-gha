@@ -28,7 +28,6 @@ jobs:
           secure: true
           username: ${{secrets.FROM_MAIL_USERNAME}}
           password: ${{secrets.FROM_MAIL_PASSWORD}}
-          subject: Failed job
+          subject: Failed Github workflow
           to: ${{secrets.TO_MAIL_USERNAME}}
-          from: Github Bot
-          body: Job failed
+          from: ${{secrets.FROM_MAIL_USERNAME}}
