@@ -1,5 +1,5 @@
 ---
-name: 'Github Workflow History'
+name: Send email
 
 # Job to run main task and send an email only the first time the task fails 
 # Based on: https://www.softwaretester.blog/detecting-github-workflow-job-run-status-changes
