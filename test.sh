@@ -4,7 +4,7 @@
 # timeout 30s sleep 900 || ( [[ $? -eq 124 ]] && echo 'WARNING: Timeout reached, but thats OK' )
 
 echo "sleeping"
-sleep 100
+sleep 10000000000
 
 
 # DURATION="${DURATION:-10m}"
